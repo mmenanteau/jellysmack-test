@@ -5,11 +5,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    characters: []
+  },
+  getters: {
+    getCharacterById: (state) => (id) => {
+      return state.characters.find(character => character.id === id)
+    }
   },
   mutations: {
-  },
-  actions: {
-  },
-  modules: {
+    updateCharacters(state, characters) {
+      state.characters.push(...characters)
+    }
   }
 })

@@ -1,6 +1,6 @@
 <template>
   <div class="search-input">
-    <input type="search" class="input" :placeholder="placeholder" v-model="value" data-test="input">
+    <input type="search" class="input" :placeholder="placeholder" v-model="value" data-test="input" @keyup.enter="onClick">
     <button type="button" class="button" data-test="button" @click="onClick">{{ buttonText }}</button>
   </div>
 </template>
@@ -32,27 +32,27 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$height: 40px;
+@import '@/styles/variables.scss';
 
+.search-input {
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: $breakpoint-sm) {
+    flex-direction: row;
+  }
+}
 .input {
-  height: $height;
-  border: 1px solid grey;
+  flex-grow: 1;
+  height: 45px;
+  border: none;
   padding: 0 1rem;
   font-size: 1rem;
 }
 .button {
-  cursor: pointer;
-  height: $height;
-  margin-top: 0.5rem;
-  padding: 0 1rem;
-  border: none;
-  background-color: black;
-  color: white;
-  font-size: 1rem;
-  font-weight: bold;
-  text-transform: uppercase;
+  margin-top: 0.75rem;
 
-  @media screen and (min-width: 992px) {
+  @media screen and (min-width: $breakpoint-sm) {
     margin-top: 0;
     margin-left: 1rem;
   }

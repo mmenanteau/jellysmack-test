@@ -1,16 +1,12 @@
 import axios from 'axios'
 
-export async function getCharacters(characters = [], page = 1) {
+export async function getCharacters(page) {
   try {
     const response = await axios.get('https://rickandmortyapi.com/api/character', {
       params: { page }
     })
-    characters.push(...response.data.results)
-    if (response.data.info.next) {
-      return getCharacters(characters, page + 1)
-    } else {
-      return characters
-    }
+    const nextPage = response.data.info.next ? page + 1 : null
+    return { characters: response.data.results, nextPage }
   } catch (error) {
     // eslint-disable-next-line
     console.error(`Error on API: ${error}`)
